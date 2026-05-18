@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🌾 Dream Farm — Ферма мечты</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="top-bar">
+            <div class="resource">
+                <span>🪙</span>
+                <span id="coinCounter">100</span>
+            </div>
+            <div class="resource">
+                <span>🌾</span>
+                <span id="wheatCounter">0</span>
+            </div>
+        </div>
+
+        <h1>🏡 DREAM FARM</h1>
+
+        <div class="farm-grid" id="farmGrid"></div>
+
+        <div class="shop-panel">
+            <button id="buyWheatSeedBtn" class="shop-btn">🌾 Купить семена пшеницы (10🪙)</button>
+        </div>
+
+        <div class="info">
+            <p>✨ Как играть: нажми на пустое поле → посадить пшеницу.<br>
+            Когда пшеница вырастет (⏳ 5 сек), нажми снова → собрать и продать за 15🪙 + 1🌾.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
