@@ -3,33 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>🌾 Dream Farm — Ферма мечты</title>
+    <title>🌾 DREAM FARM — полный клон Hay Day</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
+    <div id="gameApp">
+        <!-- Верхняя панель ресурсов -->
         <div class="top-bar">
-            <div class="resource">
-                <span>🪙</span>
-                <span id="coinCounter">100</span>
+            <div class="player-level">
+                <span>⭐ УРОВЕНЬ</span>
+                <span id="levelValue">1</span>
+                <div class="xp-bar-bg"><div id="xpBarFill" class="xp-bar-fill"></div></div>
             </div>
-            <div class="resource">
-                <span>🌾</span>
-                <span id="wheatCounter">0</span>
+            <div class="resources">
+                <div class="res-item"><span>🪙</span><span id="coinDisplay">500</span></div>
+                <div class="res-item"><span>💎</span><span id="diamondDisplay">30</span></div>
+                <div class="res-item"><span>🌾</span><span id="wheatDisplay">0</span></div>
+            </div>
+            <button id="settingsBtn" class="icon-btn">⚙️</button>
+        </div>
+
+        <!-- Главное игровое поле (изометрическая сетка 6x6) -->
+        <div class="game-world">
+            <div class="farm-grid" id="farmGrid"></div>
+        </div>
+
+        <!-- Нижняя панель инструментов -->
+        <div class="bottom-toolbar">
+            <button id="shopBtn" class="tool-btn">🏪 МАГАЗИН</button>
+            <button id="barnBtn" class="tool-btn">📦 АМБАР</button>
+            <button id="siloBtn" class="tool-btn">🌽 СИЛОС</button>
+            <button id="newspaperBtn" class="tool-btn">📰 ГАЗЕТА</button>
+            <button id="roadsideBtn" class="tool-btn">🛒 КИОСК</button>
+            <button id="ordersBtn" class="tool-btn">📋 ЗАКАЗЫ</button>
+        </div>
+
+        <!-- Модальные окна (скрыты по умолчанию) -->
+        <div id="shopModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>🏪 СТРОИТЕЛЬНЫЙ МАГАЗИН</h2>
+                <div class="shop-tabs">
+                    <button class="tab-btn active" data-tab="crops">🌾 ГРЯДКИ</button>
+                    <button class="tab-btn" data-tab="animals">🐔 ЖИВОТНЫЕ</button>
+                    <button class="tab-btn" data-tab="buildings">🏭 ПРОИЗВОДСТВО</button>
+                    <button class="tab-btn" data-tab="decor">🌸 ДЕКОР</button>
+                </div>
+                <div id="shopItemsList" class="shop-items"></div>
             </div>
         </div>
 
-        <h1>🏡 DREAM FARM</h1>
-
-        <div class="farm-grid" id="farmGrid"></div>
-
-        <div class="shop-panel">
-            <button id="buyWheatSeedBtn" class="shop-btn">🌾 Купить семена пшеницы (10🪙)</button>
+        <div id="barnModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>📦 АМБАР <span id="barnCapacity">20/20</span></h2>
+                <div id="barnItems" class="inventory-grid"></div>
+                <button id="upgradeBarnBtn" class="upgrade-btn">🔨 УЛУЧШИТЬ (10 досок + 5 гвоздей)</button>
+            </div>
         </div>
 
-        <div class="info">
-            <p>✨ Как играть: нажми на пустое поле → посадить пшеницу.<br>
-            Когда пшеница вырастет (⏳ 5 сек), нажми снова → собрать и продать за 15🪙 + 1🌾.</p>
+        <div id="siloModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>🌽 СИЛОС <span id="siloCapacity">15/15</span></h2>
+                <div id="siloItems" class="inventory-grid"></div>
+                <button id="upgradeSiloBtn" class="upgrade-btn">🔨 УЛУЧШИТЬ (8 болтов + 4 доски)</button>
+            </div>
+        </div>
+
+        <div id="newspaperModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>📰 ВЕСТНИК ФЕРМЕРА (обновление: <span id="newspaperTimer">05:00</span>)</h2>
+                <div id="newspaperAds" class="newspaper-grid"></div>
+            </div>
+        </div>
+
+        <div id="roadsideModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>🛒 ПРИДОРОЖНЫЙ КИОСК</h2>
+                <div id="roadsideSlots" class="roadside-slots"></div>
+                <button id="addRoadsideSlotBtn" class="upgrade-btn">➕ РАСШИРИТЬ (10💎)</button>
+            </div>
+        </div>
+
+        <div id="ordersModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>📋 ДОСКА ЗАКАЗОВ</h2>
+                <div id="ordersList" class="orders-grid"></div>
+                <div class="ship-section">
+                    <h3>🚢 РЕЧНОЙ КОРАБЛЬ</h3>
+                    <div id="shipOrder" class="ship-order"></div>
+                    <button id="askHelpBtn">🆘 ПОПРОСИТЬ ПОМОЩЬ (1💎)</button>
+                </div>
+            </div>
         </div>
     </div>
 
